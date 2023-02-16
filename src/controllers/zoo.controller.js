@@ -1,4 +1,4 @@
-import { Zoo } from "../models/Zoo.js";
+import { Zoo } from "../models/zoos.js";
 import {Op} from "sequelize";
 
 export const getAllZoo = async (req,res) =>{
