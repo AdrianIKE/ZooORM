@@ -1,10 +1,31 @@
 import { Zoo } from "../models/zoos.js";
+import { City } from "../models/cities.js";
+import { Country } from "../models/countries.js";
+import { Continent } from "../models/continents.js";
+import { Refuge } from "../models/refuges.js";
+import { Animal } from "../models/animals.js";
 import {Op} from "sequelize";
 
 export const getAllZoo = async (req,res) =>{
     let response;
     try{    
-        response = await Zoo.findAll();
+        response = await Zoo.findAll({
+            include:[
+                {
+                    model:City,
+                    attributes: ['city_name'],
+                    include:{
+                        model: Country,
+                        attributes: ['country_name'],
+                        include:{
+                            model:Continent,
+                            attributes: ['continent_name']
+                        }
+                    }
+                },
+
+            ]
+        });
 
     }catch(e){
         res.status(500).json({"Error": e.message});

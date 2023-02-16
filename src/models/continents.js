@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
+import { Animal } from "./animals.js";
 export const Continent =  sequelize.define('continents', {
     id_continent: {
       autoIncrement: true,
