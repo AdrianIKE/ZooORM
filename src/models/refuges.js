@@ -1,7 +1,11 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
+import { Zoo } from "./zoos.js";
+import {Specie} from "./species.js"
 export const Refuge = sequelize.define('refuges', {
     id_refuge: {
+      primaryKey: true,
+      autoIncrement : true,
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -28,7 +32,7 @@ export const Refuge = sequelize.define('refuges', {
     timestamps: false,
     indexes: [
       {
-        name: "refuge_pkey",
+        name: "pk_refuge",
         unique: true,
         fields: [
           { name: "id_refuge" },
@@ -36,4 +40,14 @@ export const Refuge = sequelize.define('refuges', {
       },
     ]
   });
+
+Refuge.hasMany(Zoo,{
+  foreignKey: "id_zoo",
+  sourceKey: 'zoo_id'
+})
+
+Refuge.hasMany(Specie,{
+  foreignKey: "id_specie",
+  sourceKey: "specie_id"
+})
 

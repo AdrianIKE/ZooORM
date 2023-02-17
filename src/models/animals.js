@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../database/database.js";
 import { Continent } from "./continents.js";
+import { Specie } from "./species.js";
 export const Animal = sequelize.define('animals', {
     id_animal: {
       autoIncrement: true,
@@ -47,3 +48,16 @@ export const Animal = sequelize.define('animals', {
       },
     ]
   });
+
+  Animal.hasOne(Specie,{
+    foreignKey: "id_specie",
+    sourceKey: "specie_id"
+  })
+
+  
+  Specie.belongsTo(Animal,{
+    foreignKey: "id_specie",
+    sourceKey:"specie_id"
+  })
+
+  

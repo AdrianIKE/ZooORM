@@ -28,3 +28,12 @@ export const Continent =  sequelize.define('continents', {
     ]
   });
 
+Continent.hasMany(Animal, {
+  foreignKey: "continent_id",
+  sourceKey: "id_continent"
+});
+
+Animal.belongsTo(Continent,{
+  foreignKey: "continent_id",
+  sourceKey:"id_continent"
+});
